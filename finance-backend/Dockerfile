@@ -34,5 +34,5 @@ ENV NODE_ENV=production
 # Expose port
 EXPOSE 3000
 
-# Start the application
-CMD ["npm", "run", "start:prod"]
+# Start the application - running migrations first to support Render Free Tier
+CMD npx prisma migrate deploy && npm run start:prod
