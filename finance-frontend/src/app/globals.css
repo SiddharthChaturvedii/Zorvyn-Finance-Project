@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #090a0c;
+  --color-surface: #0f1115;
+  --color-surface-raised: #181a1c;
+  --color-surface-high: #1e2022;
+  
+  --color-accent: #00b4d8;
+  --color-accent-dim: #00829b;
+  
+  --color-positive: #badd46;
+  --color-negative: #ff6b6b;
+
+  --color-text-main: #fdfbfe;
+  --color-text-dim: #ababad;
+
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Add cyan glow to box-shadow utilities */
+  --shadow-neon: 0 0 24px rgba(0, 180, 216, 0.15);
+  --shadow-neon-sm: 0 0 12px rgba(0, 180, 216, 0.1);
+}
+
+:root {
+  --background: var(--color-obsidian);
+  --foreground: var(--color-text-main);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  /* Next.js default smoothed text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base custom interactive states */
+.border-sculpted {
+  border: 1px solid var(--color-border-subtle);
+}
+
+.bg-obsidian-gradient {
+  background: linear-gradient(135deg, var(--color-surface), var(--color-obsidian));
+}
+
+.bg-accent-gradient {
+  background: linear-gradient(135deg, var(--color-accent-dim), var(--color-accent));
+}
+
+.text-gradient-accent {
+  background: linear-gradient(135deg, var(--color-accent), #68e8ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes spin-isometric {
+  0% { transform: rotateX(60deg) rotateZ(0deg); }
+  100% { transform: rotateX(60deg) rotateZ(360deg); }
+}
+
+@keyframes float-pulse {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.02); }
+}
+
+.animate-3d-spin {
+  animation: spin-isometric 20s linear infinite;
+  transform-style: preserve-3d;
+}
+
+.animate-float {
+  animation: float-pulse 6s ease-in-out infinite;
+}
