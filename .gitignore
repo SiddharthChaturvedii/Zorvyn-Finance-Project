@@ -1,0 +1,40 @@
+# Dependency Directories
+node_modules/
+dist/
+.next/
+out/
+build/
+
+# Environment Variables
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+
+# Logs and PID Files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Databases
+*.sqlite
+*.sqlite-journal
+
+# Editor Folders
+.vscode/
+.idea/
+.project
+.classpath
+
+# Docker
+.dockerignore
