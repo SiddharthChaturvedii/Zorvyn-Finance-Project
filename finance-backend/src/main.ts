@@ -23,11 +23,11 @@ async function bootstrap() {
   // Global exception filter
   app.useGlobalFilters(new HttpExceptionFilter());
 
-  // CORS
+  // CORS - Defensively handle trailing slashes and whitespace for production reliability
   app.enableCors({
-    origin: process.env.ALLOWED_ORIGINS?.split(',') || '*',
+    origin: (process.env.ALLOWED_ORIGINS?.split(',') || ['*']).map(origin => origin.trim().replace(/\/$/, '')),
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   });
 
   // Swagger docs
