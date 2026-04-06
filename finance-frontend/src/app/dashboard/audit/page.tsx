@@ -46,6 +46,19 @@ export default function AuditLogPage() {
     fetchLogs();
   }, [actionFilter]);
 
+  const handleExport = () => {
+    if (logs.length === 0) return;
+    const blob = new Blob([JSON.stringify(logs, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `zorvyn-audit-sequence-${new Date().toISOString()}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   if (currentUser?.role !== 'ADMIN') {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">
@@ -67,7 +80,11 @@ export default function AuditLogPage() {
           <p className="text-sm text-text-dim mt-1 font-mono uppercase tracking-widest">Immutable System Event Stream</p>
         </div>
         <div className="flex items-center gap-3">
-          <button className="bg-surface border border-sculpted hover:bg-surface-raised text-text-main font-medium py-2 px-4 rounded transition-all text-sm flex items-center gap-2 group">
+          <button 
+            onClick={handleExport}
+            disabled={logs.length === 0}
+            className="bg-surface border border-sculpted hover:bg-surface-raised text-text-main font-medium py-2 px-4 rounded transition-all text-sm flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+          >
              <Download className="w-4 h-4 text-text-dim group-hover:text-accent transition-colors" />
              Export Sequence
           </button>
