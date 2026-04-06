@@ -21,7 +21,7 @@ RUN npx prisma generate
 RUN npm run build
 
 # Compile seed file for production (ESM with CommonJS interop)
-RUN npx tsc prisma/seed.ts --outDir dist/prisma --esModuleInterop --module commonjs --skipLibCheck
+RUN npx tsc prisma/seed.ts --outDir dist/prisma --esModuleInterop --module commonjs --skipLibCheck --ignoreConfig
 
 # Production stage
 FROM node:20-alpine AS runner
