@@ -1,7 +1,7 @@
 # Technical Submission: Zorvyn Finance Dashboard
 
 Prepared by: Siddharth Chaturvedi  
-Date: April 6, 2026
+Date: April 5, 2026
 
 ## 1. Project Vision: Beyond the "CRUD" Application
 Most financial applications at this scale are built as simple "Create-Read-Update-Delete" (CRUD) tools. **Zorvyn Finance** was engineered to go beyond that. My goal was to deliver a **production-ready command center** that handles the three "Hard Problems" of Fintech: **Data Velocity**, **Operational Accountability**, and **System Scalability**.
