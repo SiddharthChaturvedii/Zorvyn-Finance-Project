@@ -20,9 +20,6 @@ COPY . .
 RUN npx prisma generate
 RUN npm run build
 
-# Compile seed file for production (ESM with CommonJS interop)
-RUN npx tsc prisma/seed.ts --outDir dist/prisma --esModuleInterop --module commonjs --skipLibCheck --ignoreConfig
-
 # Production stage
 FROM node:20-alpine AS runner
 
@@ -36,6 +33,7 @@ COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma/
+COPY --from=builder /app/tsconfig.json ./
 
 # Set environment variables
 ENV NODE_ENV=production
@@ -43,5 +41,5 @@ ENV NODE_ENV=production
 # Expose port
 EXPOSE 3000
 
-# Start the application - running migrations and compiled seed first for Render Free Tier
-CMD npx prisma migrate deploy && node dist/prisma/seed.js && npm run start:prod
+# Start the application - running migrations and seeding first for Render Free Tier
+CMD npx prisma migrate deploy && npx prisma db seed && npm run start:prod
