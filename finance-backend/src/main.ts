@@ -7,8 +7,10 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Global prefix
-  app.setGlobalPrefix('api/v1');
+  // Global prefix - excluding root (/) to serve the Welcome Gateway directly
+  app.setGlobalPrefix('api/v1', {
+    exclude: ['/'],
+  });
 
   // Global validation pipe
   app.useGlobalPipes(
