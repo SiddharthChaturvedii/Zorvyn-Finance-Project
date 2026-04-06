@@ -8,9 +8,11 @@ import { UsersModule } from './users/users.module';
 import { RecordsModule } from './records/records.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { AuditModule } from './audit/audit.module';
+import { AppController } from './app.controller';
 import { RequestIdMiddleware } from './common/middleware/request-id.middleware';
 
 @Module({
+  controllers: [AppController],
   imports: [
     // Environment config — loaded globally
     ConfigModule.forRoot({
